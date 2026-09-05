@@ -12,9 +12,9 @@ import subprocess
 import sys
 from typing import Sequence
 
-from veil import ipc, log
+from veil import __version__, ipc, log, notice
 from veil.daemon import DEFAULT_IDLE_SECONDS
-from veil.paths import pid_path, vault_path
+from veil.paths import artifacts, pid_path, vault_path
 from veil.vault import WrongPassphrase, create_vault, env_name, load_vault, save_vault
 
 CREATE_NEW_PROCESS_GROUP = 0x00000200
@@ -158,6 +158,31 @@ def cmd_set(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_unset(args: argparse.Namespace) -> int:
+    name = args.name
+    if _daemon_alive():
+        reply = _request({"op": "unset", "name": name})
+        if not reply.get("ok"):
+            raise SystemExit(reply.get("error") or "unset failed")
+        print(f"Removed {name}")
+        return 0
+    path = vault_path()
+    if not path.exists():
+        raise SystemExit("no vault — run `veil init` first")
+    passphrase = _prompt_passphrase()
+    try:
+        payload = load_vault(path, passphrase)
+    except WrongPassphrase:
+        raise SystemExit("wrong passphrase")
+    if name not in payload["secrets"]:
+        raise SystemExit(f"unknown secret: {name}")
+    del payload["secrets"][name]
+    save_vault(path, payload, passphrase)
+    log.record("unset", names=[name], result="removed")
+    print(f"Removed {name}")
+    return 0
+
+
 def cmd_list(_args: argparse.Namespace) -> int:
     if _daemon_alive():
         reply = _request({"op": "list"})
@@ -184,6 +209,34 @@ def cmd_status(_args: argparse.Namespace) -> int:
     path = vault_path()
     print(f"vault:  {path}{'  (missing)' if not path.exists() else ''}")
     print(f"session: {'unlocked' if _daemon_alive() else 'locked'}")
+    print("declare: veil explain")
+    print("erase:   veil erase --yes")
+    return 0
+
+
+def cmd_explain(_args: argparse.Namespace) -> int:
+    print(notice.render(), end="")
+    return 0
+
+
+def cmd_erase(args: argparse.Namespace) -> int:
+    if not args.yes:
+        raise SystemExit("erase requires an explicit command: veil erase --yes")
+    if _daemon_alive():
+        try:
+            _request({"op": "lock"})
+        except SystemExit:
+            pass
+    removed = []
+    for path in artifacts():
+        if path.exists():
+            path.unlink()
+            removed.append(str(path))
+    if not removed:
+        print("Nothing to erase")
+        return 0
+    for path in removed:
+        print(f"Erased {path}")
     return 0
 
 
@@ -236,9 +289,10 @@ def cmd_run(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="veil",
-        description="Local agent credential broker. The agent can use the key; it cannot see the key.",
+        description="Local run-broker. Not an AI system. Inject a named secret into one child command. Nothing in Veil prints a secret.",
     )
-    sub = parser.add_subparsers(dest="cmd", required=True)
+    parser.add_argument("--version", action="version", version=f"veil {__version__}")
+    sub = parser.add_subparsers(dest="cmd", required=False)
 
     p_init = sub.add_parser("init", help="create a local encrypted vault")
     p_init.set_defaults(func=cmd_init)
@@ -253,6 +307,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_set = sub.add_parser("set", help="store a secret (value is prompted, never argv)")
     p_set.add_argument("name")
     p_set.set_defaults(func=cmd_set)
+
+    p_unset = sub.add_parser("unset", help="remove one named secret")
+    p_unset.add_argument("name")
+    p_unset.set_defaults(func=cmd_unset)
 
     p_list = sub.add_parser("list", help="list secret names only")
     p_list.set_defaults(func=cmd_list)
@@ -269,10 +327,21 @@ def build_parser() -> argparse.ArgumentParser:
     p_run.add_argument("command", nargs=argparse.REMAINDER)
     p_run.set_defaults(func=cmd_run)
 
+    p_explain = sub.add_parser("explain", help="declare local-first rules, what is stored, and that Veil is not AI")
+    p_explain.set_defaults(func=cmd_explain)
+
+    p_erase = sub.add_parser("erase", help="delete vault, log, and session files on this machine")
+    p_erase.add_argument("--yes", action="store_true", help="required. erase is irreversible.")
+    p_erase.set_defaults(func=cmd_erase)
+
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if not getattr(args, "func", None):
+        print("Veil injects a named secret into one child command. Nothing in Veil prints a secret.")
+        print("veil explain")
+        return 0
     return args.func(args)

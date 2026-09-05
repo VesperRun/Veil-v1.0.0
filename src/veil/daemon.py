@@ -42,6 +42,16 @@ class Session:
         passphrase = self._passphrase.snapshot().decode("utf-8")
         save_vault(vault_path(), {"secrets": current}, passphrase)
 
+    def unset_secret(self, name: str) -> bool:
+        current = self.secrets()
+        if name not in current:
+            return False
+        del current[name]
+        self._secrets.replace(json.dumps(current).encode("utf-8"))
+        passphrase = self._passphrase.snapshot().decode("utf-8")
+        save_vault(vault_path(), {"secrets": current}, passphrase)
+        return True
+
     def wipe(self) -> None:
         self._passphrase.wipe()
         self._secrets.wipe()
@@ -71,6 +81,15 @@ def _handle(session: Session, message: dict[str, Any]) -> dict[str, Any]:
             return {"ok": False, "error": "name and value are required"}
         session.set_secret(name, value)
         log.record("set", names=[name], result="stored")
+        return {"ok": True}
+    if op == "unset":
+        name = str(message.get("name") or "")
+        if not name:
+            return {"ok": False, "error": "name is required"}
+        if not session.unset_secret(name):
+            log.record("unset", names=[name], result="missing")
+            return {"ok": False, "error": f"unknown secret: {name}"}
+        log.record("unset", names=[name], result="removed")
         return {"ok": True}
     if op == "resolve":
         requested = [str(n) for n in message.get("names") or []]

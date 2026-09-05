@@ -44,3 +44,14 @@ def ipc_address() -> str:
 
 def ipc_family() -> str:
     return "AF_PIPE" if os.name == "nt" else "AF_UNIX"
+
+
+def session_key_path() -> Path:
+    return data_dir() / "session.key"
+
+
+def artifacts() -> list[Path]:
+    items = [vault_path(), log_path(), pid_path(), session_key_path()]
+    if ipc_family() == "AF_UNIX":
+        items.append(Path(ipc_address()))
+    return items

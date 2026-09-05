@@ -1,7 +1,7 @@
 [project]
 name = "veil"
 version = "1.0.0"
-description = "Local agent credential broker. The agent can use the key; it cannot see the key."
+description = "Local run-broker. Not an AI system. The agent can use the key; it cannot see the key."
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"

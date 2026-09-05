@@ -18,3 +18,16 @@ def test_list_names_only(monkeypatch):
     reply = _handle(session, {"op": "list"})
     assert reply["names"] == ["openai"]
     session.wipe()
+
+
+def test_unset_removes_name(monkeypatch, tmp_path):
+    monkeypatch.setattr("veil.daemon.log.record", lambda *a, **k: None)
+    monkeypatch.setattr("veil.daemon.vault_path", lambda: tmp_path / "vault")
+    monkeypatch.setattr("veil.daemon.save_vault", lambda *a, **k: None)
+    session = Session("pw", {"secrets": {"openai": "sk-test"}}, idle_seconds=60)
+    gone = _handle(session, {"op": "unset", "name": "openai"})
+    assert gone["ok"] is True
+    assert _handle(session, {"op": "list"})["names"] == []
+    missing = _handle(session, {"op": "unset", "name": "openai"})
+    assert missing["ok"] is False
+    session.wipe()

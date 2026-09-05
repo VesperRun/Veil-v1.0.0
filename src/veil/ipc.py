@@ -9,11 +9,7 @@ import time
 from multiprocessing.connection import Client, Listener
 from typing import Any
 
-from veil.paths import data_dir, ensure_data_dir, ipc_address, ipc_family
-
-
-def session_key_path():
-    return data_dir() / "session.key"
+from veil.paths import ensure_data_dir, ipc_address, ipc_family, session_key_path
 
 
 def write_session_key() -> bytes:
