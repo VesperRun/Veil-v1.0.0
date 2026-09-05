@@ -8,6 +8,9 @@ from pathlib import Path
 
 
 def data_dir() -> Path:
+    override = os.environ.get("VEIL_HOME")
+    if override:
+        return Path(override)
     if os.name == "nt":
         base = os.environ.get("LOCALAPPDATA") or str(Path.home() / "AppData" / "Local")
         return Path(base) / "veil"
@@ -36,6 +39,9 @@ def pid_path() -> Path:
 
 
 def ipc_address() -> str:
+    override = os.environ.get("VEIL_PIPE")
+    if override:
+        return override
     if os.name == "nt":
         user = os.environ.get("USERNAME") or "user"
         return rf"\\.\pipe\veil-{user}"

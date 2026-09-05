@@ -1,6 +1,8 @@
 # Veil workstack — grow toward HASP
 
-This is expansion. Vesper ordered it. The current product is still the tiny run-broker.
+Standing order: simple, local, sharp. For the people.
+
+This file is a map, not a mandate. Do not start a layer unless Vesper cuts it. The current product is the tiny run-broker.
 
 Veil does not become HASP. Veil grows the same job: a local broker that keeps secret values out of agent context. HASP’s license (FCL), telemetry, and seven agent profiles are not copied.
 

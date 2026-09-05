@@ -50,6 +50,8 @@ AI disclosure applies only if the shipped product uses AI. Veil does not.
 
 ## Scope
 
+Standing order: simple, local, sharp. For the people.
+
 Veil stays tiny. It is a local run-broker, not a platform.
 
 - Unlock a vault, inject named secrets into one child command, lock, log names.

@@ -35,6 +35,7 @@ What it never does:
 
 Where files live:
   {data}
+  VEIL_HOME overrides that directory. VEIL_PIPE overrides the local session pipe.
 
 You approve every change. You deploy.
 """

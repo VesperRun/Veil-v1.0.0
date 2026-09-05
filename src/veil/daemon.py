@@ -115,8 +115,9 @@ def serve(session: Session) -> int:
     def shutdown(*_args: object) -> None:
         session.stopping = True
 
-    signal.signal(signal.SIGINT, shutdown)
-    signal.signal(signal.SIGTERM, shutdown)
+    if threading.current_thread() is threading.main_thread():
+        signal.signal(signal.SIGINT, shutdown)
+        signal.signal(signal.SIGTERM, shutdown)
 
     def accept_loop() -> None:
         while not session.stopping:
