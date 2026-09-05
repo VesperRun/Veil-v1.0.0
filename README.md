@@ -1,79 +1,65 @@
 # Veil
 
-Local run-broker. GPL-3. No account. No cloud. No telemetry.
+Local run-broker. The child gets the key. The transcript does not.
 
-The agent can use the key. It cannot see the key.
-
-Veil is not an AI system. It does not call a model. There is no “you are talking to AI” alert, because you are not. A later layer that invokes a model would have to stop and disclose. This one does not.
+GPL-3. No account. No cloud. No telemetry. Not an AI system.
 
 There is no `veil get`. Nothing in this tool prints a secret.
 
 ## Install
 
+Python 3.11 or newer.
+
 ```bash
+git clone https://github.com/VesperRun/Veil-v1.0.0.git
+cd Veil-v1.0.0
 pip install -e ".[dev]"
+python -m veil
 ```
+
+On Windows, use `python -m veil` if `veil` is not on PATH.
 
 ## Use
 
 ```bash
-veil init
-veil set OPENAI_API_KEY
-veil unlock
-veil run --with OPENAI_API_KEY -- python your_script.py
-veil unset OPENAI_API_KEY
-veil log
-veil lock
-veil explain
-veil erase --yes
+python -m veil init
+python -m veil set OPENAI_API_KEY
+python -m veil unlock
+python -m veil run --with OPENAI_API_KEY -- python your_script.py
+python -m veil log
+python -m veil lock
+python -m veil explain
+python -m veil erase --yes
 ```
 
-`--with NAME` injects that secret into the child process only, as an environment variable. The name is uppercased (`openai` → `OPENAI`). Store `OPENAI_API_KEY` if that is the variable you want.
+`--with NAME` injects that secret into the **child process only**, as an environment variable. `openai` becomes `OPENAI`. Store `OPENAI_API_KEY` if that is the name you want.
 
-Unlock once. The session holds secrets in memory and locks after 30 minutes idle, or when you run `veil lock`.
+Unlock once. The session holds secrets in memory and locks after 30 minutes idle, or when you run `lock`. `explain` states the rules and paths. `erase --yes` deletes the vault, log, and session files. `unset NAME` removes one secret.
 
-`veil explain` states the local-first rules, what is stored, where, and what Veil never does. `veil erase --yes` deletes the vault, log, and session files.
+## What it is
 
-## Rules
+A vault on your machine. A session you unlock. One command that may see named secrets. An access log of names and grant/deny — never values.
 
-Always, whether or not a model is present:
+Simple, local, sharp. For the people.
 
-- Data stays on this machine
-- Store only what you save
-- Nothing moves without your command
-- The tool declares itself (`veil explain`)
-- You can erase it
-- You decide; Veil does not act alone
-- No telemetry
+## What it is not
 
-AI disclosure applies only if the shipped product uses AI. Veil does not.
+Not a password manager for websites. Not HASP. Not a credential proxy. Not protection against someone who already owns the box. The child can read `os.environ`. Veil does not call a model, so there is no “you are talking to AI” alert.
 
-## Scope
+## Tests
 
-Standing order: simple, local, sharp. For the people.
+```bash
+python -m pytest -q
+```
 
-Veil stays tiny. It is a local run-broker, not a platform.
+## Privacy and security
 
-- Unlock a vault, inject named secrets into one child command, lock, log names.
-- No MCP, no agent profiles, no repo grants, no HTTP proxy, no telemetry, no account.
-- No network in the core. Local IPC only.
-
-HASP is a fuller agent broker. Agent Vault is a credential proxy. Veil injects into one child command and stops there.
-
-## What this is not
-
-Not a password manager for websites. Not protection against someone who already owns the machine. Not an AI wrapper. The child process still sees the secret in its environment. Secrets stay out of chat transcripts, `veil` output, and your shell environment.
-
-## Privacy
-
-Veil collects nothing remotely. Secrets stay on your machine. See [PRIVACY.md](PRIVACY.md) and `veil explain`.
-
-## Security
-
-How to report a hole, and what Veil does not claim: [SECURITY.md](SECURITY.md).
+- [PRIVACY.md](PRIVACY.md) — Veil collects nothing remotely.
+- [SECURITY.md](SECURITY.md) — how to report a hole, and what we do not claim.
+- On the machine: `python -m veil explain`
 
 ## License
 
-GNU General Public License v3.0 only. You can use, study, share, and change Veil. If you distribute it or a modified version, you must do so under GPL-3 as well, and provide the source. See [LICENSE](LICENSE).
+[GNU GPL-3.0 only](LICENSE). If you distribute Veil or a modified version, you must do so under GPL-3 and provide the source.
 
 For the people. Local only. Always.
