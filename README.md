@@ -19,6 +19,8 @@ python -m veil
 
 On Windows, use `python -m veil` if `veil` is not on PATH.
 
+First run, step by step: [GUIDE.md](GUIDE.md).
+
 ## Use
 
 ```bash
