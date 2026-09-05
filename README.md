@@ -64,6 +64,14 @@ HASP is a fuller agent broker. Agent Vault is a credential proxy. Veil injects i
 
 Not a password manager for websites. Not protection against someone who already owns the machine. Not an AI wrapper. The child process still sees the secret in its environment. Secrets stay out of chat transcripts, `veil` output, and your shell environment.
 
+## Privacy
+
+Veil collects nothing remotely. Secrets stay on your machine. See [PRIVACY.md](PRIVACY.md) and `veil explain`.
+
+## Security
+
+How to report a hole, and what Veil does not claim: [SECURITY.md](SECURITY.md).
+
 ## License
 
 GNU General Public License v3.0 only. You can use, study, share, and change Veil. If you distribute it or a modified version, you must do so under GPL-3 as well, and provide the source. See [LICENSE](LICENSE).
