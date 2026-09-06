@@ -11,3 +11,8 @@ venv/
 .mypy_cache/
 .ruff_cache/
 *.log
+
+# Local Product Hunt kit — not the product
+LAUNCH-PH.md
+LAUNCH-PH.txt
+assets/ph/
