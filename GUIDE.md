@@ -71,6 +71,36 @@ python -m veil erase --yes
 
 `unset` drops one name. `erase --yes` deletes vault, log, and session files. It cannot take back a key you already pasted somewhere else.
 
+## Helpful hints
+
+### What a shortcut is
+
+A shortcut is an icon on your desktop. You click it instead of typing the long `veil run` line every time.
+
+It is the same command, saved. Veil still sits in the middle. The app gets the named key for **that one launch** only. It does not get the vault. It cannot come back later and read secrets on its own.
+
+Everyday loop stays the same: `unlock` → click the shortcut → use the app → `lock` (or wait for the 30-minute idle lock).
+
+Do not put the secret in the shortcut. Only the name (`OPENAI_API_KEY`). If someone opens the shortcut’s properties, they should see a name, never a key.
+
+If Veil is locked, the click fails. That is correct. Unlock, then click again.
+
+### Make one on Windows
+
+1. Right-click the desktop → New → Shortcut.
+2. In the location box, paste one line. Change the exe path to your app:
+
+```text
+python -m veil run --with OPENAI_API_KEY -- "C:\Path\TheApp.exe"
+```
+
+3. Name it something you will recognize (`Star Turn via Veil`).
+4. Finish. Use the name you stored (`python -m veil list` if you forget). Quote the exe path if it has spaces.
+
+If a click says `python` was not found, replace `python` with the full path to `python.exe` (where Python is installed).
+
+A `.cmd` file in a folder you own is the same idea — a small file that holds that one line, which you can also pin or shortcut.
+
 ## If it fails
 
 | You see | Try |
