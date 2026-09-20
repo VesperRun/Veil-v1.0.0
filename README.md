@@ -2,7 +2,7 @@
 
 Local run-broker. The child gets the key. The transcript does not.
 
-GPL-3. No account. No cloud. No telemetry. Not an AI system.
+**VesperRun · proprietary · local-first** — free to use during early access (product policy). No account. No cloud. No telemetry. Not an AI system.
 
 There is no `veil get`. Nothing in this tool prints a secret.
 
@@ -62,6 +62,10 @@ python -m pytest -q
 
 ## License
 
-[GNU GPL-3.0 only](LICENSE). If you distribute Veil or a modified version, you must do so under GPL-3 and provide the source.
+**This build (active):** **proprietary · VesperRun · all rights reserved.** See [`LICENSE`](LICENSE) and [`LICENSE-PROPRIETARY.txt`](LICENSE-PROPRIETARY.txt).
+
+Pro Bono Populi was **never** applied to Veil. Public GitHub shipped **GPL-3.0** until withdrawal **2026-09-20**. That designation is **not** active on new commits (see [`PRO-BONO-POPULI.txt`](PRO-BONO-POPULI.txt)). [`licenses/GPL-3.0.txt`](licenses/GPL-3.0.txt) is reference only and applies to **prior public GPL releases** already published — not a grant on new proprietary work.
+
+**Public repo note:** If [VesperRun/Veil-v1.0.0](https://github.com/VesperRun/Veil-v1.0.0) was public under GPL, forks and clones of **older commits** may remain GPL-3.0. New commits after 2026-09-20 are proprietary. Consider making the repo **private** or distributing **wheel/binary-only** before VP if you want to limit further source exposure — operator decision. One LICENSE edit does not erase GitHub forks.
 
 For the people. Local only. Always.

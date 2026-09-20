@@ -1,6 +1,8 @@
 Veil — Proprietary license (VesperRun)
 ======================================
 
+This is the **active** license for this build.
+
 Copyright (c) 2026 VesperRun. All rights reserved.
 
 You may not copy, modify, distribute, or use this software or its assets
@@ -19,12 +21,12 @@ Prior public GPL releases
 Veil was previously published under GPL-3.0 on the public GitHub repo
 (VesperRun/Veil-v1.0.0). It was never designated Pro Bono Populi.
 **Commits and tags published under GPL-3.0 remain available under GPL-3.0
-to the extent already released** — this LICENSE file does not revoke
-rights on copies lawfully obtained from those releases. **New commits after
-the 2026-09-20 proprietary withdrawal** are proprietary (VesperRun). Forks of
+to the extent already released** — this file does not revoke rights on
+copies lawfully obtained from those releases. **New commits after the
+2026-09-20 proprietary withdrawal** are proprietary (VesperRun). Forks of
 older GPL commits remain governed by GPL-3.0 for those snapshots only.
 
-See LICENSE-PROPRIETARY.txt (same terms). licenses/GPL-3.0.txt is retained
-for reference and for prior public releases — not the active license for new work.
+See LICENSE (same terms). licenses/GPL-3.0.txt is retained for reference
+and for prior public releases — not the active license for new work.
 
 _For the people · Local only · Always._

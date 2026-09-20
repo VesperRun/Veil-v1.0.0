@@ -1,5 +1,5 @@
-# Copyright (C) 2026 Veil contributors
-# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (c) 2026 VesperRun. All rights reserved.
+# Proprietary — Veil local run-broker.
 
 """Operator-facing transparency. Filter tier — does not enter the vault or run loop."""
 
@@ -11,6 +11,9 @@ NOTICE = """Veil {version} — what this tool does
 Veil is a local run-broker. It is not an AI system. It does not call a model.
 How the code was written does not wrap this product. There is no AI interaction alert,
 because you are not talking to AI.
+
+VesperRun · proprietary · local-first. Free early access is product policy, not a
+license to fork or republish. Prior public GPL snapshots remain GPL for those copies.
 
 Local-first rules (always):
   I    Locality         — secrets stay on this machine

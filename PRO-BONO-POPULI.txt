@@ -1,0 +1,31 @@
+Veil — Pro Bono Populi designation
+==================================
+
+Status: NOT ACTIVE (Veil was never Pro Bono Populi; public repo was GPL-3
+until withdrawal · Vesper command · 2026-09-20)
+
+This artifact is proprietary (VesperRun). See LICENSE and LICENSE-PROPRIETARY.txt.
+
+History:
+  - Public GitHub repo VesperRun/Veil-v1.0.0 shipped under GPL-3.0 (not Pro Bono Populi).
+  - Withdrawn 2026-09-20: public GPL allowed third parties to monetize or republish
+    published source; VesperRun cannot undo rights already granted on those releases.
+  - Going forward: new commits are proprietary. Prior published GPL commits/tags
+    remain GPL-3.0 for copies obtained from those releases. Forks of those
+    snapshots stay GPL for those snapshots only.
+
+Pro Bono Populi applies only when Vesper explicitly names a public repo or
+published artifact under that designation. Veil is not so named.
+
+The product may still be free to use, local-first, and full-featured during
+early access — that is product policy, not a GPL grant on new proprietary commits.
+
+Operator may later use a private repo or wheel/binary-only distribution
+before VP. Editing LICENSE alone does not erase GitHub forks of GPL-era commits.
+
+Cite Philosophia Vesperi §XI as local canon — that file is not in this repo.
+
+Public repo note: if VesperRun/Veil-v1.0.0 remains public, old GPL commits
+remain GPL; new commits after 2026-09-20 are proprietary.
+
+_For the people · Local only · Always._

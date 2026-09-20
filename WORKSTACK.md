@@ -6,7 +6,7 @@ This file is a map, not a mandate. Do not start a layer unless Vesper cuts it. T
 
 Veil does not become HASP. Veil grows the same job: a local broker that keeps secret values out of agent context. HASP’s license (FCL), telemetry, and seven agent profiles are not copied.
 
-License stays GPL-3. No network in the Core. No telemetry at any layer.
+Active license is **VesperRun proprietary** (see `LICENSE`). `licenses/GPL-3.0.txt` is reference for prior public GPL releases only. No network in the Core. No telemetry at any layer.
 
 ## Current ground (do not rewrite)
 
@@ -30,7 +30,7 @@ Vault → Project → Target → Consumer → Grant → Broker
 1. Core stays: encrypt, unlock, inject into a child, lock, wipe. Policy does not enter `vault.py` or the wipe path.
 2. Filter observes and denies. It does not become a second vault.
 3. Application is MCP, manifests, connect helpers. It must exist before any store copy claims “works with Cursor.”
-4. Galvenais I–VII always (Philosophia Vesperi v1.2). Veil is not AI-wrapped: no TRAIGA banner, no fake “you are talking to AI.” If a later layer invokes a model, stop and apply V-B.
+4. Galvenais I–VII always (Philosophia Vesperi v1.2). Vigil (VIII): on watch by not watching — no feed, no ping, no stare; idle lock is enough. Veil is not AI-wrapped: no TRAIGA banner, no fake “you are talking to AI.” If a later layer invokes a model, stop and apply V-B.
 5. Refuse HASP telemetry, even opt-in. Refuse a default `reveal` / `get`. Refuse a cloud control plane. Refuse an HTTP MITM proxy (that is Agent Vault, a different job).
 
 ## The stack
@@ -188,7 +188,7 @@ Done when: a new operator binds, grants, connects, and runs one brokered task wi
 | `write-env` | Writes secrets into the repo. If ever added: explicit `--yes`, never default. |
 | Homebrew / signed upgrade fetch | Network in the install path. Ship a file. |
 | Seven first-class agent profiles | Expand after W10 is dull. |
-| Fair Core License | Veil stays GPL-3. |
+| Fair Core License | Veil stays VesperRun proprietary; GPL text is reference only. |
 | HTTP credential proxy | Agent Vault’s job. Split the product if you want that. |
 
 ## Suggested cuts

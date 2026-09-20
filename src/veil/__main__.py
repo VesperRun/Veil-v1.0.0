@@ -1,5 +1,5 @@
-# Copyright (C) 2026 Veil contributors
-# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (c) 2026 VesperRun. All rights reserved.
+# Proprietary — Veil local run-broker.
 
 from veil.cli import main
 
